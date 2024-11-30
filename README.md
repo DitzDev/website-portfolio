@@ -1,50 +1,33 @@
-# React + TypeScript + Vite
+# Template Website Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Assalamualaikum teman-teman, Disini gua share template portfolio, Jangan Lupa kasih ⭐ dan kalau ada yang Error buka issues aja ya! 👋😁
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+# Cara instalasi
+- pertama, Kalian harus cloning Repository ini terlebih dahulu, Masuk ke cmd kalian dan pastiin `git` sudah terinstall di perangkat kalian, Ketik ini:
+  ```bash
+  git clone https://github.com/DitzDev/website-portfolio
+  ```
+- Kedua, Kalau udah kalian masuk ke Repository nya yang udah di cloning `cd website-portfolio` dan install dependensi yang di perlukan, Pastikan juga kalian udah install Node.js
+```bash
+npm install
+```
+- Ketiga, Kalau udah terinstall, Kalian tinggal Jalanin aja Website nya, Ketik:
+```bash
+npm run dev
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Dapetin Apikey dari firebase
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+Kalian udah pernah denger Firebase? kalau belum Firebase itu adalah layanan cloud API yang menyediakan serverless function yang memudahkan Bagi developer, Berikut tutorial nya:
+- kalian masuk ke website [Firebase](https://firebase.google.com/?hl=id)
+- Kalau udah kalian buat Project kalian seterah namain apa, Dan ikutin aja setingan rekomendasi dari Firebase nya
+- Abis itu kalian klik Navigasi di pojok Kiri Atas, Kalian klik `build` dan pilih `Firestore database` dan Buat Firestore nya
+- Abis itu kalian balik lagi ke halaman utama Firebase dan pergi ke `Project Settings`
+- Nah disini kalian tinggal Klik logo `</>` di halaman Project Settings kalian, Dan ikutin aja Rekomendasi setup dari Firebase
+- Kalau udah, Nanti kalian bakal di kasih Apikey, AuthDomain, Dan Project ID kalian, Dan tinggal masukin di `src/config/firebase.ts`
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+## Server Email (Tutorial Coming Soon)
+
+## Donasi
+Project ini di buat dengan ❤️, Ayo donasi biar saya makin semangat, Ciakhh
+- [Saweria](https://saweria.co/DitzOfc)
