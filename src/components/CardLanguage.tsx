@@ -16,8 +16,16 @@ import { FaGolang } from "react-icons/fa6";
 import { TbBrandCpp } from "react-icons/tb";
 import { FaPhp } from "react-icons/fa";
 import { FaReact } from "react-icons/fa";
+import { IconType } from 'react-icons'
 
-const languageConfigs = [
+interface LanguageConfig {
+  name: string;
+  logo: IconType;
+  bgColor: string;
+  borderColor: string;
+}
+
+const languageConfigs: LanguageConfig[] = [
   {
     name: 'JavaScript',
     logo: IoLogoJavascript,
@@ -68,7 +76,14 @@ const languageConfigs = [
   }
 ];
 
-const LanguageCard = styled(Card)(({ theme, active, bgColor }) => {
+interface LanguageCardProps {
+  active?: boolean;
+  bgColor?: string;
+}
+
+const LanguageCard = styled(Card, {
+  shouldForwardProp: (prop) => prop !== 'active' && prop !== 'bgColor'
+})<LanguageCardProps>(({ theme, active, bgColor }) => {
   const isDarkMode = getComputedStyle(document.documentElement).getPropertyValue('--background') === '#0a0a0a'
   
   return {
@@ -96,11 +111,12 @@ const LanguageCard = styled(Card)(({ theme, active, bgColor }) => {
   };
 });
 
-const CardLanguage = () => {
-  const [activeLanguage, setActiveLanguage] = useState(null);
+
+const CardLanguage: React.FC = () => {
+  const [activeLanguage, setActiveLanguage] = useState<string | null>(null);
   const theme = useTheme();
 
-  const handleCardClick = (language) => {
+  const handleCardClick = (language: string) => {
     setActiveLanguage(language);
   };
 

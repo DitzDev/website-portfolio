@@ -145,7 +145,7 @@ const ContactMe: React.FC = () => {
     setIsLoading(true);
 
     try {
-      const response = await axios.post('http://localhost:8080/api/send-email', formData);
+      const response = await axios.post('https://serverless-function.vercel.app/api/send-email', formData);
       
       setFormData({
         name: '',

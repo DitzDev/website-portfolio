@@ -2,9 +2,9 @@ import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: "", /* Ganti Sama apikey firebase kalian */
-  authDomain: "",/* Ganti Sama auth Domain firebase kalian */
-  projectId: "", /* Ganti sama Project id firebase kalian*/
+  apiKey: "AIzaSyAXhuY1Ma1z4qzeUMXhAJSJcncExF_4ULo", /* Ganti Sama apikey firebase kalian */
+  authDomain: "ditzdev.firebaseapp.com",/* Ganti Sama auth Domain firebase kalian */
+  projectId: "ditzdev", /* Ganti sama Project id firebase kalian*/
 };
 
 const app = initializeApp(firebaseConfig);

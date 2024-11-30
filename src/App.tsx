@@ -31,17 +31,44 @@ import Anonym from './components/Anonym';
 import Footer from './components/Footer';
 import './App.css'
 
-const AnimatedSection = ({ children, animationType = 'default' }) => {
+ interface AnimatedSectionProps {
+  children: React.ReactNode;
+  animationType?: 'default' | 'slideLeft' | 'slideRight' | 'scale' | 'rotate';
+ }
+
+  interface SectionRefs {
+     home: React.RefObject<HTMLDivElement>;
+     skills: React.RefObject<HTMLDivElement>;
+     projects: React.RefObject<HTMLDivElement>;
+     contact: React.RefObject<HTMLDivElement>;
+     anonym: React.RefObject<HTMLDivElement>;
+  }
+  
+  interface SidebarItem {
+     text: string;
+     icon: React.ReactElement;
+     ref: React.RefObject<HTMLDivElement>;
+  }
+  
+  interface AnimationProps {
+      from: { 
+        opacity: number; 
+        transform: string; 
+      };
+      to: { 
+        opacity: number; 
+        transform: string; 
+      };
+  }
+const AnimatedSection: React.FC<AnimatedSectionProps> = ({ 
+  children, 
+  animationType = 'default' }) => {
   const [ref, inView] = useInView({
     triggerOnce: false,
     threshold: 0.1 
   });
-  const override = css`
-    display: block;
-    margin: 0 auto;
-    border-color: red;
-  `
-  const animations = {
+  
+  const animations: Record<string, AnimationProps> = {
     default: {
       from: { opacity: 0, transform: 'translateY(50px)' },
       to: { opacity: inView ? 1 : 0, transform: inView ? 'translateY(0)' : 'translateY(50px)' }
@@ -75,18 +102,24 @@ const AnimatedSection = ({ children, animationType = 'default' }) => {
 };
 
 function App() {
-  const [scrolled, setScrolled] = useState(false);
   const [repositories, setRepositories] = useState<RepositoryData[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [drawerOpen, setDrawerOpen] = useState(false);
-
-  const sectionRefs = {
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
+  const [scrolled, setScrolled] = useState<boolean>(false);  
+  
+  const sectionRefs: SectionRefs = {
     home: React.useRef<HTMLDivElement>(null),
     skills: React.useRef<HTMLDivElement>(null),
     projects: React.useRef<HTMLDivElement>(null),
     contact: React.useRef<HTMLDivElement>(null),
     anonym: React.useRef<HTMLDivElement>(null)
   };
+  
+  const sidebarItems: SidebarItem[] = [{ text: 'Home', icon: <HomeIcon sx={{ color: 'var(--foreground)' }}/>, ref: sectionRefs.home },
+            { text: 'Skills', icon: <CodeIcon sx={{ color: 'var(--foreground)' }}/>, ref: sectionRefs.skills },
+            { text: 'Projects', icon: <PersonIcon sx={{ color: 'var(--foreground)' }} />, ref: sectionRefs.projects },
+            { text: 'Contact', icon: <ContactMailIcon sx={{ color: 'var(--foreground)' }} />, ref: sectionRefs.contact },
+            { text: 'Anonymous Chat', icon: <ChatIcon sx={{ color: 'var(--foreground)' }} />, ref: sectionRefs.anonym }] 
 
   const scrollToSection = (sectionRef: React.RefObject<HTMLDivElement>) => {
     sectionRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -186,15 +219,9 @@ function App() {
             borderBottomRightRadius: 15,
           }}
         >
-          {[
-            { text: 'Home', icon: <HomeIcon sx={{ color: 'var(--foreground)' }}/>, ref: sectionRefs.home },
-            { text: 'Skills', icon: <CodeIcon sx={{ color: 'var(--foreground)' }}/>, ref: sectionRefs.skills },
-            { text: 'Projects', icon: <PersonIcon sx={{ color: 'var(--foreground)' }} />, ref: sectionRefs.projects },
-            { text: 'Contact', icon: <ContactMailIcon sx={{ color: 'var(--foreground)' }} />, ref: sectionRefs.contact },
-            { text: 'Anonymous Chat', icon: <ChatIcon sx={{ color: 'var(--foreground)' }} />, ref: sectionRefs.anonym }
-          ].map((item, index) => (
+          {sidebarItems.map((item, index) => (
             <React.Fragment key={item.text}>
-              <ListItem button onClick={() => scrollToSection(item.ref)}>
+              <ListItem component="button" onClick={() => scrollToSection(item.ref)}>
                 <ListItemIcon>{item.icon}</ListItemIcon>
                 <ListItemText primary={item.text} sx={{ color: 'var(--foreground)', fontFamily: 'Poppins' }} />
               </ListItem>
