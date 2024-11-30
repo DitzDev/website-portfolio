@@ -22,6 +22,17 @@ Kalian udah pernah denger Firebase? kalau belum Firebase itu adalah layanan clou
 - kalian masuk ke website [Firebase](https://firebase.google.com/?hl=id)
 - Kalau udah kalian buat Project kalian seterah namain apa, Dan ikutin aja setingan rekomendasi dari Firebase nya
 - Abis itu kalian klik Navigasi di pojok Kiri Atas, Kalian klik `build` dan pilih `Firestore database` dan Buat Firestore nya
+- Ke `Rules` Kalian edit Rules nya jadi gini:
+```javascript
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if true;
+    }
+  }
+}
+```
 - Abis itu kalian balik lagi ke halaman utama Firebase dan pergi ke `Project Settings`
 - Nah disini kalian tinggal Klik logo `</>` di halaman Project Settings kalian, Dan ikutin aja Rekomendasi setup dari Firebase
 - Kalau udah, Nanti kalian bakal di kasih Apikey, AuthDomain, Dan Project ID kalian, Dan tinggal masukin di `src/config/firebase.ts`
