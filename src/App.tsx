@@ -129,7 +129,7 @@ function App() {
   useEffect(() => {
     const loadRepositories = async () => {
       const USERNAME = 'DitzDev';
-      const REPOSITORIES = ['LoraBotz', 'snake_game', '3d-saturn-python'];
+      const REPOSITORIES = ['pixelify', 'shikimori', 'YukiBotz'];
 
       const fetchedRepos = await fetchRepositories(USERNAME, REPOSITORIES);
       console.log("Fetched Repository: ", fetchedRepos);
